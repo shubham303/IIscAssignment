@@ -44,11 +44,17 @@ def save_model(model, epoch, image_size,optimizer, criterion , filename):
 
 
 def pretrained_model(new_layer, train_layers):
+	"""
 	
+	:param new_layer: if set to True, new FC layer is added on top of final FC layer
+	:param train_layers: percentage of layers to finetune
+	:return: return model
+	"""
 	model = ResnetPretrained(len(configuration.classes), new_layer)
 	
 	for p in list(model.parameters()):
 		p.requires_grad = False
+	
 	
 	finetune_layer_percentage = train_layers
 	n = len(list(model.parameters()))

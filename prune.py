@@ -20,9 +20,11 @@ wandb.init(project="cifar-10-prune-0")
 
 prune_percent  =0
 while prune_percent <=0.9:
+	#load model
 	model = Resnet(len(classes), False).to(device)
 	net_dict = torch.load(PATH)
 	model.load_state_dict(net_dict["model_state_dict"])
+	#prune the model
 	model, _ =  get_zero_pruned_model(model, prune_percent)
 
 	model.eval()

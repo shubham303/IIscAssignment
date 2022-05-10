@@ -85,8 +85,11 @@ def train_runner(num_epoch, train_loader, net, val_dataloader, optimizer, criter
 		metric = {"val_loss": val_loss, "val_acc": val_acc}
 		print(metric)
 		if train_model(train_loader, val_dataloader, epoch, net, optimizer, criterion, save_best) == -1:
+			#if model loss has not derceased for few iterations then early stop
 			break
+		
 		filename = basename.replace(".pth", "_{}.pth".format(epoch))
+		
 		save_model(net, epoch, image_size, optimizer, criterion, filename)
 	
 	print('Finished Training')

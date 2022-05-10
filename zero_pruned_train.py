@@ -57,13 +57,15 @@ if __name__ == "__main__":
 	config = wandb.config
 	os.makedirs("/media/shubham/One Touch/iisc_asssignment/zero_pruning/{}/".format(wandb.run.id))
 	path = "/media/shubham/One Touch/iisc_asssignment/zero_pruning/{}/cifar_net.pth".format(wandb.run.id)
-
+	
+	#create model
 	net = Resnet(len(configuration.classes), 10).to(device)
 	net_dict = torch.load(config["checkpoint"])
 	net.load_state_dict(net_dict["model_state_dict"])
+	#prune the model
 	net, cutoff = get_zero_pruned_model(net, config["prune_percent"])
 	
 	x = count_zero_weights(net)
 	train(net, config, path)
-	print(x , "   ", count_zero_weights(net))
+	print(x , "   ", count_zero_weights(net))  # ensure number of zero weights is same before and after training
 

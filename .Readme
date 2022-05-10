@@ -1,1 +1,40 @@
 Wandb Report : https://wandb.ai/cs20m064/uncategorized/reports/CIFAR-10-Assignment--VmlldzoxOTc2MjQ4
+
+
+1) hooks:
+    Hook package contains WeightFreezeHook class, which freezes weights of given list of parameters
+
+2) Models:
+    Models package contains NN classes,
+    Model.py : Implementation of Resnet-18 for CIFAR-10
+    pruned_model.py  : provides methods to return zero-pruned and freezed models
+    utils.py : provides methods for computing cutoff weight for given prune percent
+
+
+3) runner:
+        runner package contains test_runner and train_runner methods
+
+
+4) utils:
+    dataloader.py  : provides methods to create a dataloader
+    save_best.py : used to keep track of best model during training, also notifies trainer if loss has not decreased for
+     after some fixed interval for early stopping
+
+5) freeze_train.py  Task-5
+    1) trains a freezed model as expected in task 5.
+
+
+6) prune.py:  Task-3
+    program computes accuracy of zero_pruned model for various prune percent.
+
+7) test.py:
+    generic code for testing model accuracy
+
+8) train.py  Task-1:
+    code for training model
+
+9) train_pretrained :  Task-2
+    creates a pretrained resnet-18 model and trains it on CIFAR-10 dataset
+
+10)  zero_pruned_train.py : Task-4
+     Code for training zero-pruned model

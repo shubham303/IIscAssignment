@@ -16,12 +16,6 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 
 def train(net, config, save_path="./"):
-	"""
-	:param checkpoint: resume trainging from checkpoint
-	:param freeze:
-	:param freeze:
-	:return:
-	"""
 	
 	criterion = nn.CrossEntropyLoss()
 	
@@ -34,6 +28,7 @@ def train(net, config, save_path="./"):
 	transform = get_transform(config["image_size"])
 	train_dataloader, _ = get_trainvalloader(config["batch_size"], transform)
 	val_dataloader = get_testloader(config["batch_size"], transform)
+	
 	
 	train_runner(config["epochs"], train_dataloader, net, val_dataloader, optimizer, criterion, save_path,
 	             config["image_size"])
@@ -56,15 +51,18 @@ if __name__ == "__main__":
 	# 1. Start a W&B run
 	wandb.init(config=default_config, project='cifar-10-freeze')
 	config = wandb.config
+	
+	#path to save the model
 	os.makedirs("/media/shubham/One Touch/iisc_asssignment/freeze/{}/".format(wandb.run.id))
 	path = "/media/shubham/One Touch/iisc_asssignment/freeze/{}/cifar_net.pth".format(wandb.run.id)
 	
+	#load model
 	net = Resnet(len(configuration.classes), 10).to(device)
 	net_dict = torch.load(config["checkpoint"])
 	net.load_state_dict(net_dict["model_state_dict"])
+	# get freezed model
 	net, cutoff = get_freezed_model(net, config["freeze_percent"])
 	
-	x = count_zero_weights(net)
 	train(net, config, path)
-	print(x, "   ", count_zero_weights(net))
+
 

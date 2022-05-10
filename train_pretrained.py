@@ -25,11 +25,14 @@ default_config = {
 # 1. Start a W&B run
 wandb.init(config=default_config, project='cifar-10-finetuning')
 config = wandb.config
+#load pretrained model
 net = pretrained_model(config["new_layer"], config["train_layer"]).to(device)
 os.makedirs("/media/shubham/One Touch/iisc_asssignment/finetuned/{}/".format(wandb.run.id))
 path = "/media/shubham/One Touch/iisc_asssignment/finetuned/{}/cifar_net.pth".format(wandb.run.id)
+
 train(net, config, path)
 
+# finetune whole network with smaller learning rate
 if config["finetune_lr"] != 0:
 	net = load_best_acc_model(path).to(device)
 	run_id = wandb.run.id

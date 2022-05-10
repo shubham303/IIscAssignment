@@ -2,6 +2,12 @@ import torch
 
 
 def pruning_cut_off(parameters_to_prune, prune_percent):
+	"""
+	
+	:param parameters_to_prune: list of parameters
+	:param prune_percent: amount of weights to be pruned
+	:return: total_no_of_parameters, cutoff value
+	"""
 	total_weight_parameters =0
 	# count  number of parameters
 	for p in parameters_to_prune:
@@ -25,6 +31,13 @@ def pruning_cut_off(parameters_to_prune, prune_percent):
 
 
 def get_parameters_list(model,module_type,parameter_type):
+	"""
+	
+	:param model:
+	:param module_type: type of module to be considered e.g Conv, linear etc
+	:param parameter_type: parameter type, weight , bias etc
+	:return: return list of parameters
+	"""
 	parameters = []
 	for name, module in model.named_modules():
 		if type(module) in module_type:
