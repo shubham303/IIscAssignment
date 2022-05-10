@@ -1,0 +1,17 @@
+program: freezed_train.py
+method: grid
+parameters:
+  lr:
+    values : [0.001]
+  weight_decay:
+    values : [0]
+  optimizer:
+    values: ["sgd"]
+  epochs:
+    values : [10]
+  image_size:
+    values : [224]
+  batch_size:
+    values : [16]
+  freeze_percent:
+    values : [ 0.1, 0.2,  0.3,  0.4, 0.5,  0.6,  0.7, 0.8,  0.9]

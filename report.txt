@@ -1,0 +1,17 @@
+*pretrained*
+PATH = "/media/shubham/One Touch/iisc_asssignment/finetuned/2e8w5uem/cifar_net_best_loss.pth"
+train_pretrained.py --batch_size=64 --epochs=15 --finatune_whole_lr=0 --image_size=224 --lr=0.001 --new_layer=True --optimizer=adam --train_layer=30 --weight_decay=0.001
+
+accuracy = 87 %
+
+************model 0 pruning ********************
+https://wandb.ai/cs20m064/cifar-10-prune-0/runs/1uj911ou?workspace=user-
+
+
+**************************************
+https://wandb.ai/cs20m064/uncategorized/sweeps/u399tlfg?workspace=user-
+
+
+
+
+https://wandb.ai/cs20m064/uncategorized/sweeps/ira5esgy?workspace=user-

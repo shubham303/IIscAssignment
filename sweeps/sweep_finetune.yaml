@@ -1,0 +1,25 @@
+program: train_pretrained.py
+method: bayes
+metric:
+  goal: minimize
+  name: val_loss
+parameters:
+  lr:
+    values : [0.001, 0.01]
+  weight_decay:
+    values : [0.0001, 0.001]
+  optimizer:
+    values: ["adam"]
+  epochs:
+    values : [15]
+  image_size:
+    values : [224]
+  batch_size:
+    values : [32, 64]
+  new_layer:
+    values : [True, False]
+  train_layer :
+    values : [ 4, 7, 10 , 20 ,30]
+
+  finatune_whole_lr:
+    values: [ 0, 0, 0.01,0.1 0.001]
